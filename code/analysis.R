@@ -19,7 +19,8 @@ library(ggplot2)
 ENV_2022 <- read_delim("data/ENV_2022.csv", 
                         delim = ";",
                         locale = locale(encoding = "UTF-8"),
-                        col_types = cols(fecha_mad = col_character())) 
+                        col_types = cols(fecha_mad = col_character()),
+                        trim_ws = T) 
 
 # Datos 2021 
 # ENV_2021 = read.csv("data/ENV_2021.csv", sep = ";")
@@ -29,67 +30,98 @@ ENV_2022 <- read_delim("data/ENV_2022.csv",
 ENV_2021 <- read_delim("data/ENV_2021.csv", 
                         delim = ";",
                         locale = locale(encoding = "UTF-8"),
-                        col_types = cols(fecha_mad = col_character()))
-
+                        col_types = cols(fecha_mad = col_character(),
+                                         fecha_insc = col_character()),
+                        trim_ws = TRUE)
 
 # Datos 2020
-ENV_2020 = read.csv("data/ENV_2020.csv", sep = ";")
+# ENV_2020 = read.csv("data/ENV_2020.csv", sep = ";")
+
+# Read 2020 with read_delim function
+
+ENV_2020 <- read_delim("data/ENV_2020.csv", 
+                        delim = ";",
+                        locale = locale(encoding = "UTF-8"),
+                        col_types = cols(fecha_mad = col_character()),
+                        trim_ws = TRUE)
 
 # Datos 2019
-ENV_2019 = read.csv("data/ENV_2019.csv", sep = ";")
+#ENV_2019 = read.csv("data/ENV_2019.csv", sep = ";")
+
+# Read 2019 with read_delim function
+
+ENV_2019 <- read_delim("data/ENV_2019.csv", 
+                        delim = ";",
+                        locale = locale(encoding = "UTF-8"),
+                        col_types = cols(fecha_mad = col_character()),
+                        trim_ws = TRUE)
 
 # Datos 2018
-ENV_2018 = read.csv("data/ENV_2018.csv", sep = ";")
+#ENV_2018 = read.csv("data/ENV_2018.csv", sep = ";")
+
+# Read 2018 with read_delim function
+
+ENV_2018 <- read_delim("data/ENV_2018.csv", 
+                        delim = ";",
+                        locale = locale(encoding = "UTF-8"),
+                        col_types = cols(fecha_mad = col_character()),
+                        trim_ws = TRUE)
 
 # Datos 2017
-ENV_2017 = read_sav("data/ENV_2017.sav")
+ENV_2017 <- read_sav("data/ENV_2017.sav")
 
 # Datos 2016
-ENV_2016 = read_sav("data/ENV_2016.sav")
+ENV_2016 <- read_sav("data/ENV_2016.sav")
 
 # Datos 2015
-ENV_2015 = read_sav("data/ENV_2015.sav")
+ENV_2015 <- read_sav("data/ENV_2015.sav")
 
 # Datos 2014
-ENV_2014 = read_sav("data/ENV_2014.sav")
+ENV_2014 <- read_sav("data/ENV_2014.sav")
 
 # Datos 2013
-ENV_2013 = read_sav("data/ENV_2013.sav")
+ENV_2013 <- read_sav("data/ENV_2013.sav")
+
+#Proyecciones poblacionales mujeres de 10 a 19 años - nivel provincial 2010-2019
+
+Proyecciones_poblacionales <- read_excel("data/Proyecciones_poblacionales.xlsx")
 
 # Limpieza de datos -----------------------------------------------------------
 
 #LIMPIEZA: VARIABLES ANIO_NAC, PROV_NAC, EDAD_MAD 
 
 # Limpieza variables 2022
-ENV_2022_LIMPIA = ENV_2022[,c(9,21,32)]
+ENV_2022_LIMPIA  <-  ENV_2022[,c(9,21,32)]
 
 # Limpieza variables 2021
-ENV_2021_LIMPIA = ENV_2021[,c(9,21,32)]
+ENV_2021_LIMPIA  <-  ENV_2021[,c(9,21,32)]
 
 # Limpieza variables 2020
-ENV_2020_LIMPIA = ENV_2020[,c(9,21,32)]
+ENV_2020_LIMPIA  <-  ENV_2020[,c(9,21,32)]
 
 # Limpieza variables 2019
-ENV_2019_LIMPIA = ENV_2019[,c(9,21,32)]
+ENV_2019_LIMPIA  <-  ENV_2019[,c(9,21,32)]
 
 # Limpieza variables 2018
-ENV_2018_LIMPIA = ENV_2018[,c(10,21,32)]
+ENV_2018_LIMPIA  <-  ENV_2018[,c(10,21,32)]
 
 # Limpieza variables 2017
-ENV_2017_LIMPIA = ENV_2017[,c(9,21,32)]
+ENV_2017_LIMPIA  <-  ENV_2017[,c(9,21,32)]
 
 # Limpieza variables 2016
-ENV_2016_LIMPIA = ENV_2016[,c(9,21,32)]
+ENV_2016_LIMPIA  <-  ENV_2016[,c(9,21,32)]
 
 # Limpieza variables 2015
-ENV_2015_LIMPIA = ENV_2015[,c(9,21,32)]
+ENV_2015_LIMPIA  <-  ENV_2015[,c(9,21,32)]
 
 # Limpieza variables 2014
-ENV_2014_LIMPIA = ENV_2014[,c(15,21,32)]
+ENV_2014_LIMPIA  <-  ENV_2014[,c(15,21,32)]
 
 # Limpieza variables 2013
-ENV_2013_LIMPIA = ENV_2013[,c(16,23,32)]
+ENV_2013_LIMPIA  <-  ENV_2013[,c(16,23,32)]
+
 # Desetiquetar la columna prov_nac
+
 ENV_2017_LIMPIA$prov_nac <- as.character(ENV_2017_LIMPIA$prov_nac)
 
 # Definir un diccionario de mapeo de números a palabras
@@ -123,35 +155,35 @@ mapeo <- c("01" = "Azuay",
 # Aplicar la transformación usando case_when
 
 # Recodifcar data 2017
-ENV_2017_LIMPIA = ENV_2017_LIMPIA %>%
+ENV_2017_LIMPIA  <-  ENV_2017_LIMPIA %>%
   mutate(prov_nac = case_when(
     prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
     TRUE ~ prov_nac
   ))
 
 # Recodifcar data 2016
-ENV_2016_LIMPIA = ENV_2016_LIMPIA %>%
+ENV_2016_LIMPIA  <-  ENV_2016_LIMPIA %>%
   mutate(prov_nac = case_when(
     prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
     TRUE ~ prov_nac
   ))
 
 # Recodifcar data 2015
-ENV_2015_LIMPIA = ENV_2015_LIMPIA %>%
+ENV_2015_LIMPIA  <-  ENV_2015_LIMPIA %>%
   mutate(prov_nac = case_when(
     prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
     TRUE ~ prov_nac
   ))
 
 # Recodifcar data 2014
-ENV_2014_LIMPIA = ENV_2014_LIMPIA %>%
+ENV_2014_LIMPIA  <-  ENV_2014_LIMPIA %>%
   mutate(prov_nac = case_when(
     prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
     TRUE ~ prov_nac
   ))
 
 # Recodifcar data 2013
-ENV_2013_LIMPIA = ENV_2013_LIMPIA %>%
+ENV_2013_LIMPIA  <-  ENV_2013_LIMPIA %>%
   mutate(prov_nac = case_when(
     prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
     TRUE ~ prov_nac
@@ -160,43 +192,43 @@ ENV_2013_LIMPIA = ENV_2013_LIMPIA %>%
 # FILTRAR EDAD < 19 2013-2022
 
 # Filtrar edad < 19 2022
-ENV_2022_LIMPIA_filtr = ENV_2022_LIMPIA %>%
+ENV_2022_LIMPIA_filtr  <-  ENV_2022_LIMPIA %>%
   filter(edad_mad < 20 ) 
 
 # Filtrar edad < 19 2021
-ENV_2021_LIMPIA_filtr = ENV_2021_LIMPIA %>%
+ENV_2021_LIMPIA_filtr  <-  ENV_2021_LIMPIA %>%
   filter(edad_mad < 20 ) 
 
 # Filtrar edad < 19 2020
-ENV_2020_LIMPIA_filtr = ENV_2020_LIMPIA %>%
+ENV_2020_LIMPIA_filtr  <-  ENV_2020_LIMPIA %>%
   filter(edad_mad < 20 ) 
 
 # Filtrar edad < 19 2019
-ENV_2019_LIMPIA_filtr = ENV_2019_LIMPIA %>%
+ENV_2019_LIMPIA_filtr  <-  ENV_2019_LIMPIA %>%
   filter(edad_mad < 20 ) 
 
 # Filtrar edad < 19 2018
-ENV_2018_LIMPIA_filtr = ENV_2018_LIMPIA %>%
+ENV_2018_LIMPIA_filtr  <-  ENV_2018_LIMPIA %>%
   filter(edad_mad < 20 ) 
 
 # Filtrar edad < 19 2017
-ENV_2017_LIMPIA_filtr = ENV_2017_LIMPIA %>%
+ENV_2017_LIMPIA_filtr  <-  ENV_2017_LIMPIA %>%
   filter(edad_mad < 20 ) 
 
 # Filtrar edad < 19 2016
-ENV_2016_LIMPIA_filtr = ENV_2016_LIMPIA %>%
+ENV_2016_LIMPIA_filtr  <-  ENV_2016_LIMPIA %>%
   filter(edad_mad < 20 ) 
 
 # Filtrar edad < 19 2015
-ENV_2015_LIMPIA_filtr = ENV_2015_LIMPIA %>%
+ENV_2015_LIMPIA_filtr  <-  ENV_2015_LIMPIA %>%
   filter(edad_mad < 20 ) 
 
 # Filtrar edad < 19 2014
-ENV_2014_LIMPIA_filtr = ENV_2014_LIMPIA %>%
+ENV_2014_LIMPIA_filtr <- ENV_2014_LIMPIA %>%
   filter(edad_mad < 20 ) 
 
 # Filtrar edad < 19 2013
-ENV_2013_LIMPIA_filtr = ENV_2013_LIMPIA %>%
+ENV_2013_LIMPIA_filtr <- ENV_2013_LIMPIA %>% 
   filter(edad_mad < 20 ) 
 
 #Para combinar las bases de datos, las columnas deben tener el mismo tipo de datos.
@@ -247,16 +279,18 @@ ENV_2013_LIMPIA_filtr$prov_nac <- as.character(ENV_2013_LIMPIA_filtr$prov_nac)
 
 #DATOS INDEXADOS ENV_XXXX_LIMPA_filtr 2013-2022
 
-datos_combinados = bind_rows(ENV_2013_LIMPIA_filtr, ENV_2014_LIMPIA_filtr, ENV_2015_LIMPIA_filtr, ENV_2016_LIMPIA_filtr, ENV_2017_LIMPIA_filtr, ENV_2018_LIMPIA_filtr, ENV_2019_LIMPIA_filtr, ENV_2020_LIMPIA_filtr, ENV_2021_LIMPIA_filtr, ENV_2022_LIMPIA_filtr)
+datos_combinados <- 
+  bind_rows(ENV_2013_LIMPIA_filtr, 
+            ENV_2014_LIMPIA_filtr, ENV_2015_LIMPIA_filtr, ENV_2016_LIMPIA_filtr, ENV_2017_LIMPIA_filtr, 
+            ENV_2018_LIMPIA_filtr, ENV_2019_LIMPIA_filtr, ENV_2020_LIMPIA_filtr, ENV_2021_LIMPIA_filtr, ENV_2022_LIMPIA_filtr)
+  
 # Filtrar datos combinados año < 2012
-datos_combinados = datos_combinados %>%
+datos_combinados <- datos_combinados %>%
   filter(anio_nac > 2012 )
 
-#Proyecciones poblacionales mujeres de 10 a 19 años - nivel provincial 2010-2019
-Proyecciones_poblacionales <- read_excel("Datos/Proyecciones_poblacionales.xlsx")
-
 # Limpieza variables Proyecciones poblacionales mujeres de 10 a 19 años de 2013 a 2019
-Proyecciones_poblacionales2013.2019 = Proyecciones_poblacionales[,c(1,5,6,7,8,9,10,11)]
+
+Proyecciones_poblacionales2013.2019  <- Proyecciones_poblacionales[,c(1,5,6,7,8,9,10,11)]
 
 #Cambio de nombre variable en proyecciones_poblacionales2013.2019 de "Provincia" a "prov_nac"
 
@@ -264,11 +298,12 @@ colnames(Proyecciones_poblacionales2013.2019)[colnames(Proyecciones_poblacionale
 
 # Crear tres nuevos años -2020,2021,2022- con la misma proyección que en 2019
 
-Proyecciones_poblacionales2013.2022 = Proyecciones_poblacionales2013.2019 %>%
+Proyecciones_poblacionales2013.2022  <-  
+  Proyecciones_poblacionales2013.2019 %>%
   mutate(`2020` = `2019`, `2021` = `2019`, `2022` = `2019`)
+
 PROYECCIONES_long <- Proyecciones_poblacionales2013.2022 %>%
   pivot_longer(cols = -prov_nac, names_to = "anio_nac", values_to = "num_proy")
-
 
 #TASA DE 10 A 19 AÑOS POR PROVINCIA 2013-2022
 embarazos_filtrados.10.19 <- datos_combinados %>%
@@ -281,7 +316,9 @@ nacimientos_por_provincia10.19 <- embarazos_filtrados.10.19 %>%
 
 # Creación base de datos con provincia, año, núm nacidos por año y núm proyección madres 10 a 19 años 
 
-tasa_embarazo_prov_10.19 <- merge(nacimientos_por_provincia0, PROYECCIONES_long, by.x = c("prov_nac", "anio_nac"), by.y = c("prov_nac", "anio_nac"), all.x = TRUE)
+tasa_embarazo_prov_10.19 <- merge(nacimientos_por_provincia10.19, PROYECCIONES_long, by.x = c("prov_nac", "anio_nac"), 
+                                  by.y = c("prov_nac", "anio_nac"), all.x = TRUE)
+
 tasa_embarazo_prov_10.19$Tasa <- (tasa_embarazo_prov_10.19$num_nacimientos / tasa_embarazo_prov_10.19$num_proy) * 1000 # Por cada 1,000 niñas de 10 a 19 años 
 
 #TASA DE 10 A 14 AÑOS POR PROVINCIA 2013-2022
@@ -298,7 +335,7 @@ nacimientos_por_provincia10.14 <- embarazos_filtrados.10.14 %>%
 
 # Creación base de datos con provincia, año, núm nacidos por año y núm proyección madres 10 a 14 años 
 
-tasa_embarazo_prov_10.14 <- merge(nacimientos_por_provincia, PROYECCIONES_long, by.x = c("prov_nac", "anio_nac"), by.y = c("prov_nac", "anio_nac"), all.x = TRUE)
+tasa_embarazo_prov_10.14 <- merge(nacimientos_por_provincia10.14, PROYECCIONES_long, by.x = c("prov_nac", "anio_nac"), by.y = c("prov_nac", "anio_nac"), all.x = TRUE)
 tasa_embarazo_prov_10.14$Tasa <- (tasa_embarazo_prov_10.14$num_nacimientos / tasa_embarazo_prov_10.14$num_proy) * 1000 # Por cada 1,000 niñas de 10 a 14 años 
 
 #TASA DE 15 A 19 AÑOS POR PROVINCIA 2013-2022
@@ -315,7 +352,7 @@ nacimientos_por_provincia15.19 <- embarazos_filtrados.15.19 %>%
 
 # Creación base de datos con provincia, año, núm nacidos por año y núm proyección madres 10 a 14 años 
 
-tasa_embarazo_prov_15.19 <- merge(nacimientos_por_provincia2, PROYECCIONES_long, by.x = c("prov_nac", "anio_nac"), by.y = c("prov_nac", "anio_nac"), all.x = TRUE)
+tasa_embarazo_prov_15.19 <- merge(nacimientos_por_provincia15.19, PROYECCIONES_long, by.x = c("prov_nac", "anio_nac"), by.y = c("prov_nac", "anio_nac"), all.x = TRUE)
 tasa_embarazo_prov_15.19$Tasa <- (tasa_embarazo_prov_15.19$num_nacimientos / tasa_embarazo_prov_15.19$num_proy) * 1000 # Por cada 1,000 niñas de 10 a 14 años 
 
 #############################################
@@ -331,7 +368,6 @@ pr_total_por_anio <- PROYECCIONES_long %>%
 
 total_embarazos_por_año.10.14 <- aggregate(. ~ anio_nac, data = embarazos_filtrados.10.14, FUN = length)
 total_embarazos_por_año.10.14 <- total_embarazos_por_año.10.14[, -which(names(total_embarazos_por_año.10.14) == "prov_nac")]
-
 
 # Combinación de dos bases de datos (total_embarazos_por_año.15.14 y pr_total_por_anio) por la columna "Anio nac"
 tasatotal10.14 <- merge(total_embarazos_por_año.10.14, pr_total_por_anio, by = "anio_nac", all = TRUE)
@@ -364,11 +400,11 @@ ggplot(tasatotal10.14, aes(x = anio_nac, y = Tasa_Embarazos)) +
     panel.grid.minor = element_blank()   # Eliminar la cuadrícula menor
   ) 
 
-
 #TASA DE EMBARAZO POR AÑO (2013 A 2022) NIÑAS de 15 a 19 años 
 #Total de embarazos por año 15 a 19 años
 
 total_embarazos_por_año.15.19 <- aggregate(. ~ anio_nac, data = embarazos_filtrados.15.19, FUN = length)
+total_embarazos_por_año.10.19 <- aggregate(. ~ anio_nac, data = embarazos_filtrados.10.19, FUN = length)
 total_embarazos_por_año.15.19 <- total_embarazos_por_año.15.19[, -which(names(total_embarazos_por_año.15.19) == "prov_nac")]
 
 # Combinación de dos bases de datos (total_embarazos_por_año.15.14 y pr_total_por_anio) por la columna "Anio nac"
@@ -408,10 +444,10 @@ ggplot(tasatotal15.19, aes(x = anio_nac, y = Tasa_Embarazos)) +
 #Tasa por año 
 
 # Combinación de dos bases de datos (total_embarazos_por_año.15.14 y pr_total_por_anio) por la columna "Anio nac"
-tasatotal10.19 <- merge(nacimientos_por_año.10.19, pr_total_por_anio, by = "anio_nac", all = TRUE)
+tasatotal10.19 <- merge(total_embarazos_por_año.10.19, pr_total_por_anio, by = "anio_nac", all = TRUE)
 
-# Tasa por cada 1000 niñas 15-19
-tasatotal10.19$Tasa_Embarazos <- tasatotal10.19$num_nacimientos/ tasatotal10.19$total_poblacion * 1000
+# Tasa por cada 1000 niñas 10-19
+tasatotal10.19$Tasa_Embarazos <- (tasatotal10.19$edad_mad/ tasatotal10.19$total_poblacion) * 1000
 
 # Convierte la columna "Anio_nac" en un factor
 tasatotal10.19$anio_nac <- factor(tasatotal10.19$anio_nac)
@@ -443,6 +479,8 @@ Gráfico_1= ggplot(tasas_combinadas, aes(x = anio_nac, y = Tasa_Embarazos, group
 
 print(Gráfico_1)
 
+# Datos para el texto --------------------------------------------------------
+
 #Porcentaje de reducción 
 
 # Definir las tasas de 2013 y 2022
@@ -455,9 +493,8 @@ reduccion_absoluta <- tasa_2013 - tasa_2022
 # Calcular el porcentaje de reducción
 porcentaje_reduccion.15.19 <- (reduccion_absoluta / tasa_2013) * 100
 
-###########################################
+# SOLO AÑO 2022 ---------------------------------------------------------------
 
-#SOLO AÑO 2022 
 # Estimación diaria de Embarazo infantil y adolescente niñas de 10 a 14 años en Ecuador 2022
 
 año_2022 <- 2022
