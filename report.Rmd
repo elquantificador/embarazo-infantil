@@ -3,8 +3,9 @@ output:
   html_document:
     default
 title: "¿Cuáles son las tasas de embarazo infantil y adolescente en Ecuador? Una Radiografía Cuantitativa de un Desafío Persistente"
+author: Carolina Espinosa
+bibliography: references.bib
 ---
-Carolina Espinosa 2024-03-26 Tiempo de lectura: 8 minutos
 
 ```{r setup, include = FALSE}
 # Opciones de chunks
@@ -12,22 +13,22 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 # Introducción
 
-Ecuador históricamente ha enfrentado una problemática social y de salud pública[^1] difícil de ignorar: el embarazo infantil y adolescente. De acuerdo con las cifras del Instituto Nacional de Estadísticas y Censos (en adelante INEC), aproximadamente 5 niñas de 10 a 14 años y 104 adolescentes de 15 a 19 años son madres diariamente[^2]. En el 2013, según datos del Informe del Estado Mundial de Población, la tasa de embarazo en adolescentes en Ecuador se encontraba entre las más altas de América Latina, después de Nicaragua y República Dominicana.
+Ecuador históricamente ha enfrentado una problemática social y de salud pública[^1] difícil de ignorar: el embarazo infantil y adolescente. De acuerdo con las cifras del Instituto Nacional de Estadísticas y Censos (en adelante INEC), aproximadamente 5 niñas de 10 a 14 años y 104 adolescentes de 15 a 19 años son madres diariamente[^2]. En el 2013, según datos del Informe del Estado Mundial de Población, la tasa de embarazo en adolescentes en Ecuador se encontraba entre las más altas de América Latina, después de Nicaragua y República Dominicana [@ministerio_de_salud_publica_antecedentes_2018].
 
-Este hecho plantea preguntas fundamentales sobre la educación, la equidad de género, la atención médica y otros conceptos sobre el bienestar social del país a lo largo de su historia. El objetivo de este artículo es examinar nuestra tendencia histórica de madres que se caracterizan por ser niñas y adolescentes en Ecuador  mediante el estudio de datos estadísticos vitales recopilados por el INEC, correspondientes al periodo comprendido entre 2013 y 2022. Asimismo, se busca llevar a cabo un análisis detallado de la situación que reflejan dichas estadísticas.
+Este hecho plantea preguntas fundamentales sobre la educación, la equidad de género, la atención médica y otros conceptos sobre el bienestar social del país a lo largo de su historia. El objetivo de este artículo es examinar nuestra tendencia histórica de madres que se caracterizan por ser niñas y adolescentes en Ecuador mediante el estudio de datos estadísticos vitales recopilados por el INEC, correspondientes al periodo comprendido entre 2013 y 2022. Asimismo, se busca llevar a cabo un análisis detallado de la situación que reflejan dichas estadísticas.
 
 # La realidad de las niñas y adolescentes ecuatorianas 
+  
+Antes de realizar un análisis de los datos sobre embarazos infantiles en el país, es coherente situar al problema dentro del contexto nacional. En Ecuador, donde se define como niño o niña a toda persona desde su concepción hasta los 12 años, y adolescente a toda persona mayor de 12 años y menor de 18, éstos grupos demográficos representan el 18.39% de la población [@naciones_unidas_resumen_2023].  La profundidad del embarazo infantil y adolescente se caracteriza por su complejidad multifacética, compuesta por varios ejes, como la desigualdad socioeconómica, la falta de educación sexual y la violencia de género. De acuerdo a ONU Mujeres, a través de  sus investigaciones metodológicas llevadas a cabo desde un enfoque interseccional en el año 2021, se evidencia que la tasa de pobreza multidimensional en niñas y adolescentes en Ecuador alcanza el 45.8%[^3], mientras que el nivel de analfabetismo alcanza un 17.9% [@naciones_unidas_ninas_nodate]. Esto contribuye directamente al problema, debido a que aumenta la vulnerabilidad de las niñas y adolescentes, las cuales tienen menos acceso a los recursos para educación sexual y reproductiva y servicios de salud adecuados, que podrían reducir los embarazos en edades tempranas. 
 
-Antes de realizar un análisis de los datos sobre embarazos infantiles en el país, es coherente situar al problema dentro del contexto nacional. En Ecuador, donde se define como niño o niña a toda persona desde su concepción hasta los 12 años, y adolescente a toda persona mayor de 12 años y menor de 18, éstos grupos demográficos representan el 18,39 % de la población.  La profundidad del embarazo infantil y adolescente se caracteriza por su complejidad multifacética, compuesta por varios ejes, como la desigualdad socioeconómica, la falta de educación sexual y la violencia de género. De acuerdo a ONU Mujeres, a través de  sus investigaciones metodológicas llevadas a cabo desde un enfoque interseccional en el año 2021, se evidencia que la tasa de pobreza multidimensional en niñas y adolescentes en Ecuador alcanza el 45,8%[^3], mientras que el nivel de analfabetismo alcanza un 17,9%. Esto contribuye directamente al problema, debido a que aumenta la vulnerabilidad de las niñas y adolescentes, las cuales tienen menos acceso a los recursos para educación sexual y reproductiva y servicios de salud adecuados, que podrían reducir los embarazos en edades tempranas. 
+Por otra parte, la Convención sobre la Eliminación de Todas las Formas de Discriminación contra la Mujer (CEDAW), afirma que en Ecuador existe una falta de formación sistemática referente a derechos sexuales y reproductivos y en materia de salud en general por parte de docentes en enseñanza secundaria[@cedaw_convencion_2021]. Asimismo, los embarazos en niñas y adolescentes conlleva significativas tasas de deserción escolar, lo que a su vez se traduce en una disminución de oportunidades para mejorar la calidad de vida en el futuro [@naciones_unidas_ninas_nodate].
 
-Por otra parte, la Convención sobre la Eliminación de Todas las Formas de Discriminación contra la Mujer (CEDAW), afirma que en Ecuador existe una falta de formación sistemática referente a derechos sexuales y reproductivos y en materia de salud en general por parte de docentes en enseñanza secundaria. Asimismo, los embarazos en niñas y adolescentes conlleva significativas tasas de deserción escolar, lo que a su vez se traduce en una disminución de oportunidades para mejorar la calidad de vida en el futuro.
-
-El embarazo en niñas y adolescentes está estrechamente relacionado con la violencia de género. Este panorama se ve agravado por la disminución del 25% en el presupuesto asignado a políticas públicas para la igualdad de género entre 2017 y 2021 por parte del Estado ecuatoriano. Esta reducción presupuestaria podría intensificar la vulnerabilidad de niñas y adolescentes frente a embarazos no deseados, poniendo en peligro aún más los avances previos en la promoción de la igualdad y la lucha contra la violencia de género, ya que limita significativamente en la ejecución de programas y proyectos destinados a fortalecer los sistemas de protección frente a toda forma de violencia, incluida la desigualdad de poder y la violencia sexual hacia la mujer. 
+El embarazo en niñas y adolescentes está estrechamente relacionado con la violencia de género [@unfa_consecuencias_2020]. Este panorama se ve agravado por la disminución del 25% en el presupuesto asignado a políticas públicas para la igualdad de género entre 2017 y 2021 por parte del Estado ecuatoriano[@cedaw_convencion_2021]. Esta reducción presupuestaria podría intensificar la vulnerabilidad de niñas y adolescentes frente a embarazos no deseados, poniendo en peligro aún más los avances previos en la promoción de la igualdad y la lucha contra la violencia de género, ya que limita significativamente en la ejecución de programas y proyectos destinados a fortalecer los sistemas de protección frente a toda forma de violencia, incluida la desigualdad de poder y la violencia sexual hacia la mujer. 
 
 # Tasa de nacidos vivos de madres niñas y adolescente en los últimos 10 años
 
 ```{r}
-knitr::include_graphics("C:/Users/Otros/Desktop/Embarazo Infantil y adolescente/Gráfico_1.png")
+knitr::include_graphics("images/grafico1.png")
 ```
 
 En el gráfico se puede visualizar la evolución de la tasa de nacidos vivos en niñas de 10 a 19 años en Ecuador durante un período de 10 años, desde 2013 hasta 2022, la cual se expresa en el número de nacidos vivos por cada mil niñas habitantes en el país. 
@@ -44,7 +45,7 @@ Aunque las cifras del gráfico reflejan una disminución en la tasa de embarazo 
 # Provincias con las mayores tasas de natalidad en el 2022
 
 ```{r}
-knitr::include_graphics("C:/Users/Otros/Desktop/Embarazo Infantil y adolescente/Gráfico_2.png")
+knitr::include_graphics("images/grafico2.png")
 ```
 
 Durante el año 2022, se registraron un total de 40,008 embarazos (parto) en niñas y adolescentes en Ecuador. El gráfico resalta las provincias en Ecuador con las tasas de embarazo (parto) más elevadas. En primer lugar se encuentra Morona Santiago, seguida de cerca por Napo, Santo Domingo de los Tsáchilas, Los Ríos y Orellana. Los datos reflejan una considerable disparidad en la tasa de embarazos de niñas y adolescentes, sobre todo en la región Amazónica, en la cual las tasas son notablemente superiores en comparación a otras regiones del país. 
