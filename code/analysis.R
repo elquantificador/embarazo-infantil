@@ -13,6 +13,8 @@ library(readxl)
 library(RColorBrewer)
 library(ggplot2)
 
+# 
+
 # Carga de base de datos
 
 #Datos 2022 
