@@ -68,9 +68,7 @@ El Estado debe reconocer y responder a las necesidades específicas de cada regi
 
 # Notas Metodológicas 
 
-El análisis de la tasa de natalidad de Madres Niñas y Adolescentes se basa en las proyecciones de población proporcionadas por el Instituto Nacional de Estadística y Censos (INEC). Sin embargo, es importante señalar que las proyecciones de población del INEC están disponibles hasta el año 2019, puesto que las proyecciones poblacionales para años posteriores estarían disponibles cuando un siguiente censo (2022) se realice. Hasta la fecha de redacción del artículo, las proyecciones poblacionales del censo 2022 no se han publicado por el INEC. 
-
-Dado que nuestro estudio abarca los años 2020, 2021 y 2022, y con la ausencia de proyecciones actualizadas, se ha utilizado las proyecciones de población del año 2019 para estimar la tasa de natalidad en los años subsiguientes. Reconocemos que esta elección puede introducir ciertas limitaciones en la exactitud de nuestros resultados, ya que no refleja posibles cambios demográficos que puedan haber ocurrido después de 2019.
+El análisis de la tasa de natalidad de Madres Niñas y Adolescentes se basa en las proyecciones de población proporcionadas por el Instituto Nacional de Estadística y Censos (INEC). Sin embargo, es importante señalar que las proyecciones de población del INEC están disponibles hasta el año 2019, que son las mas recientes a la fecha de redaccion del artículo. Reconocemos que esta elección puede introducir ciertas limitaciones en la exactitud de nuestros resultados, ya que no refleja posibles cambios demográficos que puedan haber ocurrido después de 2019.
 
 # Referencias 
 
