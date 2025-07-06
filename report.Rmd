@@ -4,7 +4,7 @@ output:
     default
 title: "¿Cuáles son las tasas de embarazo infantil y adolescente en Ecuador? Una Radiografía Cuantitativa de un Desafío Persistente"
 author: Carolina Espinosa
-bibliography: references.bib
+bibliography: refs.bib
 ---
 
 ```{r setup, include = FALSE}
@@ -28,7 +28,7 @@ El embarazo en niñas y adolescentes está estrechamente relacionado con la viol
 # Tasa de nacidos vivos de madres niñas y adolescente en los últimos 10 años
 
 ```{r}
-knitr::include_graphics("images/grafico1.png")
+knitr::include_graphics("figures/grafico1.png")
 ```
 
 En el gráfico se puede visualizar la evolución de la tasa de nacidos vivos en niñas de 10 a 19 años en Ecuador durante un período de 10 años, desde 2013 hasta 2022, la cual se expresa en el número de nacidos vivos por cada mil niñas habitantes en el país. 
@@ -45,7 +45,7 @@ Aunque las cifras del gráfico reflejan una disminución en la tasa de embarazo 
 # Provincias con las mayores tasas de natalidad en el 2022
 
 ```{r}
-knitr::include_graphics("images/grafico2.png")
+knitr::include_graphics("figures/grafico2.png")
 ```
 
 Durante el año 2022, se registraron un total de 40,008 embarazos (parto) en niñas y adolescentes en Ecuador. El gráfico resalta las provincias en Ecuador con las tasas de embarazo (parto) más elevadas. En primer lugar se encuentra Morona Santiago, seguida de cerca por Napo, Santo Domingo de los Tsáchilas, Los Ríos y Orellana. Los datos reflejan una considerable disparidad en la tasa de embarazos de niñas y adolescentes, sobre todo en la región Amazónica, en la cual las tasas son notablemente superiores en comparación a otras regiones del país. 

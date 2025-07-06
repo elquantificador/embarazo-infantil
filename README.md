@@ -23,7 +23,7 @@ Fuente de los datos: [Registros Estadísticos de Nacidos Vivos y Defunciones Fet
 ## Estructura
 
 - `data/` contiene los archivos originales suministrados por el INEC.
-- `code/analysis.R` realiza la limpieza y el análisis descriptivo.
+- `code/embarazo_analysis.R` realiza la limpieza y el análisis descriptivo.
 - `report.Rmd` es la versión editada para su publicación en línea.
 
 Para más detalles sobre las fuentes consulte `DATA.md`.
