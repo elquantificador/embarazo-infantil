@@ -13,74 +13,27 @@ library(readxl)
 library(RColorBrewer)
 library(ggplot2)
 
-# Carga de base de datos
+# Carga de base de datos ------------------------------------------------------
 
-#Datos 2022 
-ENV_2022 <- read_delim("data/ENV_2022.csv", 
-                        delim = ";",
-                        locale = locale(encoding = "UTF-8"),
-                        col_types = cols(fecha_mad = col_character()),
-                        trim_ws = T) 
+read_env <- function(year) {
+  path <- file.path("data", sprintf("ENV_%s", year))
+  if (year >= 2018) {
+    read_delim(paste0(path, ".csv"), delim = ";",
+               locale = locale(encoding = "UTF-8"),
+               col_types = cols(fecha_mad = col_character(),
+                                fecha_insc = col_character()),
+               trim_ws = TRUE)
+  } else {
+    read_sav(paste0(path, ".sav"))
+  }
+}
 
-# Datos 2021 
-# ENV_2021 = read.csv("data/ENV_2021.csv", sep = ";")
+years <- 2013:2022
+env_list <- lapply(years, read_env)
+names(env_list) <- paste0("ENV_", years)
+list2env(env_list, envir = globalenv())
 
-# Read 2021 with read_delim function
-
-ENV_2021 <- read_delim("data/ENV_2021.csv", 
-                        delim = ";",
-                        locale = locale(encoding = "UTF-8"),
-                        col_types = cols(fecha_mad = col_character(),
-                                         fecha_insc = col_character()),
-                        trim_ws = TRUE)
-
-# Datos 2020
-# ENV_2020 = read.csv("data/ENV_2020.csv", sep = ";")
-
-# Read 2020 with read_delim function
-
-ENV_2020 <- read_delim("data/ENV_2020.csv", 
-                        delim = ";",
-                        locale = locale(encoding = "UTF-8"),
-                        col_types = cols(fecha_mad = col_character()),
-                        trim_ws = TRUE)
-
-# Datos 2019
-#ENV_2019 = read.csv("data/ENV_2019.csv", sep = ";")
-
-# Read 2019 with read_delim function
-
-ENV_2019 <- read_delim("data/ENV_2019.csv", 
-                        delim = ";",
-                        locale = locale(encoding = "UTF-8"),
-                        col_types = cols(fecha_mad = col_character()),
-                        trim_ws = TRUE)
-
-# Datos 2018
-#ENV_2018 = read.csv("data/ENV_2018.csv", sep = ";")
-
-# Read 2018 with read_delim function
-
-ENV_2018 <- read_delim("data/ENV_2018.csv", 
-                        delim = ";",
-                        locale = locale(encoding = "UTF-8"),
-                        col_types = cols(fecha_mad = col_character()),
-                        trim_ws = TRUE)
-
-# Datos 2017
-ENV_2017 <- read_sav("data/ENV_2017.sav")
-
-# Datos 2016
-ENV_2016 <- read_sav("data/ENV_2016.sav")
-
-# Datos 2015
-ENV_2015 <- read_sav("data/ENV_2015.sav")
-
-# Datos 2014
-ENV_2014 <- read_sav("data/ENV_2014.sav")
-
-# Datos 2013
-ENV_2013 <- read_sav("data/ENV_2013.sav")
+#Proyecciones poblacionales mujeres de 10 a 19 años - nivel provincial 2010-2019
 
 #Proyecciones poblacionales mujeres de 10 a 19 años - nivel provincial 2010-2019
 
@@ -88,43 +41,31 @@ Proyecciones_poblacionales <- read_excel("data/Proyecciones_poblacionales.xlsx")
 
 # Limpieza de datos -----------------------------------------------------------
 
-#LIMPIEZA: VARIABLES ANIO_NAC, PROV_NAC, EDAD_MAD 
+#LIMPIEZA: VARIABLES ANIO_NAC, PROV_NAC, EDAD_MAD
 
-# Limpieza variables 2022
-ENV_2022_LIMPIA  <-  ENV_2022[,c(9,21,32)]
+pos_map <- list(
+  `2022` = c(9,21,32),
+  `2021` = c(9,21,32),
+  `2020` = c(9,21,32),
+  `2019` = c(9,21,32),
+  `2018` = c(10,21,32),
+  `2017` = c(9,21,32),
+  `2016` = c(9,21,32),
+  `2015` = c(9,21,32),
+  `2014` = c(15,21,32),
+  `2013` = c(16,23,32)
+)
 
-# Limpieza variables 2021
-ENV_2021_LIMPIA  <-  ENV_2021[,c(9,21,32)]
+for (y in names(pos_map)) {
+  df <- get(paste0("ENV_", y))
+  assign(paste0("ENV_", y, "_LIMPIA"), df[, pos_map[[y]]])
+}
 
-# Limpieza variables 2020
-ENV_2020_LIMPIA  <-  ENV_2020[,c(9,21,32)]
-
-# Limpieza variables 2019
-ENV_2019_LIMPIA  <-  ENV_2019[,c(9,21,32)]
-
-# Limpieza variables 2018
-ENV_2018_LIMPIA  <-  ENV_2018[,c(10,21,32)]
-
-# Limpieza variables 2017
-ENV_2017_LIMPIA  <-  ENV_2017[,c(9,21,32)]
-
-# Limpieza variables 2016
-ENV_2016_LIMPIA  <-  ENV_2016[,c(9,21,32)]
-
-# Limpieza variables 2015
-ENV_2015_LIMPIA  <-  ENV_2015[,c(9,21,32)]
-
-# Limpieza variables 2014
-ENV_2014_LIMPIA  <-  ENV_2014[,c(15,21,32)]
-
-# Limpieza variables 2013
-ENV_2013_LIMPIA  <-  ENV_2013[,c(16,23,32)]
-
-# Desetiquetar la columna prov_nac
-
+# Desetiquetar la columna prov_nac de 2017
 ENV_2017_LIMPIA$prov_nac <- as.character(ENV_2017_LIMPIA$prov_nac)
 
 # Definir un diccionario de mapeo de números a palabras
+
 mapeo <- c("01" = "Azuay",
            "02" = "Bolívar",
            "03" = "Cañar",
@@ -152,137 +93,30 @@ mapeo <- c("01" = "Azuay",
            "88" = "Exterior",
            "90" = "Zonas No Delimitadas")
 
-# Aplicar la transformación usando case_when
-
-# Recodifcar data 2017
-ENV_2017_LIMPIA  <-  ENV_2017_LIMPIA %>%
-  mutate(prov_nac = case_when(
-    prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
-    TRUE ~ prov_nac
-  ))
-
-# Recodifcar data 2016
-ENV_2016_LIMPIA  <-  ENV_2016_LIMPIA %>%
-  mutate(prov_nac = case_when(
-    prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
-    TRUE ~ prov_nac
-  ))
-
-# Recodifcar data 2015
-ENV_2015_LIMPIA  <-  ENV_2015_LIMPIA %>%
-  mutate(prov_nac = case_when(
-    prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
-    TRUE ~ prov_nac
-  ))
-
-# Recodifcar data 2014
-ENV_2014_LIMPIA  <-  ENV_2014_LIMPIA %>%
-  mutate(prov_nac = case_when(
-    prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
-    TRUE ~ prov_nac
-  ))
-
-# Recodifcar data 2013
-ENV_2013_LIMPIA  <-  ENV_2013_LIMPIA %>%
-  mutate(prov_nac = case_when(
-    prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
-    TRUE ~ prov_nac
-  ))
+# Aplicar la transformación usando case_when para los años 2013-2017
+for (y in 2013:2017) {
+  df_name <- paste0("ENV_", y, "_LIMPIA")
+  df <- get(df_name) %>%
+    mutate(prov_nac = case_when(
+      prov_nac %in% names(mapeo) ~ mapeo[prov_nac],
+      TRUE ~ prov_nac
+    ))
+  assign(df_name, df)
+}
 
 # FILTRAR EDAD < 19 2013-2022
+for (y in years) {
+  df_name <- paste0("ENV_", y, "_LIMPIA_filtr")
+  df <- get(paste0("ENV_", y, "_LIMPIA")) %>%
+    filter(edad_mad < 20)
+  df$edad_mad <- as.character(df$edad_mad)
+  df$prov_nac <- as.character(df$prov_nac)
+  assign(df_name, df)
+}
 
-# Filtrar edad < 19 2022
-ENV_2022_LIMPIA_filtr  <-  ENV_2022_LIMPIA %>%
-  filter(edad_mad < 20 ) 
-
-# Filtrar edad < 19 2021
-ENV_2021_LIMPIA_filtr  <-  ENV_2021_LIMPIA %>%
-  filter(edad_mad < 20 ) 
-
-# Filtrar edad < 19 2020
-ENV_2020_LIMPIA_filtr  <-  ENV_2020_LIMPIA %>%
-  filter(edad_mad < 20 ) 
-
-# Filtrar edad < 19 2019
-ENV_2019_LIMPIA_filtr  <-  ENV_2019_LIMPIA %>%
-  filter(edad_mad < 20 ) 
-
-# Filtrar edad < 19 2018
-ENV_2018_LIMPIA_filtr  <-  ENV_2018_LIMPIA %>%
-  filter(edad_mad < 20 ) 
-
-# Filtrar edad < 19 2017
-ENV_2017_LIMPIA_filtr  <-  ENV_2017_LIMPIA %>%
-  filter(edad_mad < 20 ) 
-
-# Filtrar edad < 19 2016
-ENV_2016_LIMPIA_filtr  <-  ENV_2016_LIMPIA %>%
-  filter(edad_mad < 20 ) 
-
-# Filtrar edad < 19 2015
-ENV_2015_LIMPIA_filtr  <-  ENV_2015_LIMPIA %>%
-  filter(edad_mad < 20 ) 
-
-# Filtrar edad < 19 2014
-ENV_2014_LIMPIA_filtr <- ENV_2014_LIMPIA %>%
-  filter(edad_mad < 20 ) 
-
-# Filtrar edad < 19 2013
-ENV_2013_LIMPIA_filtr <- ENV_2013_LIMPIA %>% 
-  filter(edad_mad < 20 ) 
-
-#Para combinar las bases de datos, las columnas deben tener el mismo tipo de datos.
-
-#Edad_mad as character 2013-2022
-
-ENV_2022_LIMPIA_filtr$edad_mad <- as.character(ENV_2022_LIMPIA_filtr$edad_mad)
-
-ENV_2021_LIMPIA_filtr$edad_mad <- as.character(ENV_2021_LIMPIA_filtr$edad_mad)
-
-ENV_2020_LIMPIA_filtr$edad_mad <- as.character(ENV_2020_LIMPIA_filtr$edad_mad)
-
-ENV_2019_LIMPIA_filtr$edad_mad <- as.character(ENV_2019_LIMPIA_filtr$edad_mad)
-
-ENV_2018_LIMPIA_filtr$edad_mad <- as.character(ENV_2018_LIMPIA_filtr$edad_mad)
-
-ENV_2017_LIMPIA_filtr$edad_mad <- as.character(ENV_2017_LIMPIA_filtr$edad_mad)
-
-ENV_2016_LIMPIA_filtr$edad_mad <- as.character(ENV_2016_LIMPIA_filtr$edad_mad)
-
-ENV_2015_LIMPIA_filtr$edad_mad <- as.character(ENV_2015_LIMPIA_filtr$edad_mad)
-
-ENV_2014_LIMPIA_filtr$edad_mad <- as.character(ENV_2014_LIMPIA_filtr$edad_mad)
-
-ENV_2013_LIMPIA_filtr$edad_mad <- as.character(ENV_2013_LIMPIA_filtr$edad_mad)
-
-#Prov_nac as character 2013-2022
-
-ENV_2022_LIMPIA_filtr$prov_nac <- as.character(ENV_2022_LIMPIA_filtr$prov_nac)
-
-ENV_2021_LIMPIA_filtr$prov_nac <- as.character(ENV_2021_LIMPIA_filtr$prov_nac)
-
-ENV_2020_LIMPIA_filtr$prov_nac <- as.character(ENV_2020_LIMPIA_filtr$prov_nac)
-
-ENV_2019_LIMPIA_filtr$prov_nac <- as.character(ENV_2019_LIMPIA_filtr$prov_nac)
-
-ENV_2018_LIMPIA_filtr$prov_nac <- as.character(ENV_2018_LIMPIA_filtr$prov_nac)
-
-ENV_2017_LIMPIA_filtr$prov_nac <- as.character(ENV_2017_LIMPIA_filtr$prov_nac)
-
-ENV_2016_LIMPIA_filtr$prov_nac <- as.character(ENV_2016_LIMPIA_filtr$prov_nac)
-
-ENV_2015_LIMPIA_filtr$prov_nac <- as.character(ENV_2015_LIMPIA_filtr$prov_nac)
-
-ENV_2014_LIMPIA_filtr$prov_nac <- as.character(ENV_2014_LIMPIA_filtr$prov_nac)
-
-ENV_2013_LIMPIA_filtr$prov_nac <- as.character(ENV_2013_LIMPIA_filtr$prov_nac)
-
-#DATOS INDEXADOS ENV_XXXX_LIMPA_filtr 2013-2022
-
-datos_combinados <- 
-  bind_rows(ENV_2013_LIMPIA_filtr, 
-            ENV_2014_LIMPIA_filtr, ENV_2015_LIMPIA_filtr, ENV_2016_LIMPIA_filtr, ENV_2017_LIMPIA_filtr, 
-            ENV_2018_LIMPIA_filtr, ENV_2019_LIMPIA_filtr, ENV_2020_LIMPIA_filtr, ENV_2021_LIMPIA_filtr, ENV_2022_LIMPIA_filtr)
+datos_combinados <- bind_rows(lapply(years, function(y) {
+  get(paste0("ENV_", y, "_LIMPIA_filtr"))
+}))
   
 # Filtrar datos combinados año < 2012
 datos_combinados <- datos_combinados %>%
