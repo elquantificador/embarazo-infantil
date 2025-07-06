@@ -1,17 +1,23 @@
-# ¿Cuáles son las tasas de embarazo infantil y adolescente en Ecuador? Una Radiografía Cuantitativa de un Desafío Persistente
+# Embarazo infantil y adolescente en Ecuador: Una radiografía cuantitativa
 
-Repositorio para el artículo de El Quantificador sobre embarazo infantil y adolescente.
+Este repositorio contiene el código y los archivos necesarios para reproducir el análisis del artículo de El Quantificador sobre las tasas de embarazo infantil y adolescente en Ecuador.
 
 Fuente de los datos: [Registros Estadísticos de Nacidos Vivos y Defunciones Fetales del Instituto Ecuatoriano de Estadísticas y Censos](https://www.ecuadorencifras.gob.ec/nacidos-vivos-y-defunciones-fetales/).
 
-## Reproducir el análisis
+## Requisitos
+- R (>= 4.0) (se recomienda usar RStudio).
+- Paquetes de R que se instalarán automáticamente al ejecutar los scripts:
+  ```r
+  install.packages(c("readr", "haven", "tidyr", "dplyr", "readxl",
+                     "RColorBrewer", "ggplot2", "rmarkdown"))
+  ```
+- Opcionalmente LaTeX para compilar el artículo en PDF.
 
-1. Instale R (>= 4.0) y los siguientes paquetes:
-   ```r
-   install.packages(c("readr", "haven", "tidyr", "dplyr", "readxl",
-                      "RColorBrewer", "ggplot2", "rmarkdown"))
-   ```
-2. Ejecute `rmarkdown::render("report.Rmd")` para generar `report.html`.
+## Cómo reproducir el análisis
+
+1. Clona o descarga este repositorio.
+2. Instala los paquetes de R mencionados en los requisitos.
+3. Ejecuta `rmarkdown::render("report.Rmd")` para generar `report.html`.
    El script `code/analysis.R` cargará todos los archivos de `data/` y generará los gráficos utilizados en el artículo.
 
 ## Estructura
@@ -21,3 +27,5 @@ Fuente de los datos: [Registros Estadísticos de Nacidos Vivos y Defunciones Fet
 - `report.Rmd` es la versión editada para su publicación en línea.
 
 Para más detalles sobre las fuentes consulte `DATA.md`.
+
+Para más información, revisa el perfil de GitHub de la [autora](https://github.com/carolinaespinosa).
