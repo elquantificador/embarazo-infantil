@@ -17,14 +17,14 @@ Fuente de los datos: [Registros Estadísticos de Nacidos Vivos y Defunciones Fet
 
 1. Clona o descarga este repositorio.
 2. Instala los paquetes de R mencionados en los requisitos.
-3. Ejecuta `rmarkdown::render("report.Rmd")` para generar `report.html`.
+3. Ejecuta `rmarkdown::render("report/report.Rmd")` para generar `report.html`.
    El script `code/analysis.R` cargará todos los archivos de `data/` y generará los gráficos utilizados en el artículo.
 
 ## Estructura
 
 - `data/` contiene los archivos originales suministrados por el INEC.
 - `code/embarazo_analysis.R` realiza la limpieza y el análisis descriptivo.
-- `report.Rmd` es la versión editada para su publicación en línea.
+- `report/report.Rmd` es la versión editada para su publicación en línea.
 
 Para más detalles sobre las fuentes consulte `DATA.md`.
 

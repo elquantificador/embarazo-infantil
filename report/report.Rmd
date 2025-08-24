@@ -1,10 +1,13 @@
+// Moved to report folder
 ---
 output:
   html_document:
     default
 title: "¿Cuáles son las tasas de embarazo infantil y adolescente en Ecuador? Una Radiografía Cuantitativa de un Desafío Persistente"
 author: Carolina Espinosa
-bibliography: refs.bib
+bibliography: report/refs.bib
+link-citations: true
+csl: report/style.csl
 ---
 
 ```{r setup, include = FALSE}
