@@ -41,7 +41,7 @@ y se repiten para 2020, 2021 y 2022.
 | Fuente | Institución | Periodo | Acceso | Script |
 |---|---|---|---|---|
 | Registro Estadístico de Nacidos Vivos y Defunciones Fetales (ENV), bases anuales | INEC | 2013 a 2022 | manual; https://www.ecuadorencifras.gob.ec/nacidos-vivos-y-defunciones-fetales/ | `code/embarazo_analysis.R` lee `data/ENV_2013.sav` a `data/ENV_2022.csv` |
-| Proyecciones poblacionales, mujeres de 10 a 19 años por provincia | INEC | 2013 a 2019 (2020 a 2022 repiten 2019) | manual; [COMPLETAR: no se encontró el enlace oficial en el repositorio ni en el artículo] | `code/embarazo_analysis.R` lee `data/Proyecciones_poblacionales.xlsx` |
+| Proyecciones poblacionales, mujeres de 10 a 19 años por provincia | INEC | 2013 a 2019 (2020 a 2022 repiten 2019) | manual; [INEC, Estimaciones y proyecciones de población, revisión 2012](https://www.ecuadorencifras.gob.ec/proyecciones-poblacionales-2010-2020/) (el archivo local es una extracción manual de las proyecciones por edades y provincias) | `code/embarazo_analysis.R` lee `data/Proyecciones_poblacionales.xlsx` |
 
 El repositorio no tiene scripts de descarga. Los archivos de `data/` se
 descargaron a mano desde el portal del INEC y están incluidos en el

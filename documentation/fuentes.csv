@@ -1,3 +1,3 @@
 source_name,institution,period,official_url,downloaded_file,script
 Registro Estadístico de Nacidos Vivos y Defunciones Fetales (ENV),INEC,2013-2022,https://www.ecuadorencifras.gob.ec/nacidos-vivos-y-defunciones-fetales/,data/ENV_2013.sav; data/ENV_2014.sav; data/ENV_2015.sav; data/ENV_2016.sav; data/ENV_2017.sav; data/ENV_2018.csv; data/ENV_2019.csv; data/ENV_2020.csv; data/ENV_2021.csv; data/ENV_2022.csv,manual
-Proyecciones poblacionales (mujeres de 10 a 19 años por provincia),INEC,2013-2019,[COMPLETAR: no se encontró el enlace oficial en el repositorio ni en el artículo],data/Proyecciones_poblacionales.xlsx,manual
+Proyecciones poblacionales (mujeres de 10 a 19 años por provincia),INEC,2013-2019,https://www.ecuadorencifras.gob.ec/proyecciones-poblacionales-2010-2020/,data/Proyecciones_poblacionales.xlsx,manual
