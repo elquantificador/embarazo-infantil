@@ -21,3 +21,17 @@ Fuente de los datos: [Registros Estadísticos de Nacidos Vivos y Defunciones Fet
    El script `code/analysis.R` cargará todos los archivos de `data/` y generará los gráficos utilizados en el artículo.
 
 Para más información, revisa el perfil de GitHub de la [autora](https://github.com/carolinaespinosa).
+
+
+## Licencias y cómo citar
+
+- **Código:** [MIT](LICENSE).
+- **Texto, figuras y tablas:** [CC BY-NC 4.0](LICENSE-content).
+- **Datos de terceros:** conservan los términos de su fuente
+  ([aviso](DATA-NOTICE.md)).
+- **Nombre y logotipos:** todos los derechos reservados.
+
+Las cifras y resultados pueden citarse libremente. Menciona a los autores y a
+El Quantificador (LIDE) y enlaza la publicación original. Los usos comerciales
+de gráficos, tablas o texto requieren autorización previa:
+elquantificador@laboratoriolide.org. Ver también `CITATION.cff`.
